@@ -1,41 +1,44 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Box } from '@mui/material';
 
 const TaskForm = ({ addTask }) => {
     const [task, setTask] = useState('');
 
-    // To handle form submission
+    /**
+     * To handle form submission
+     * @param {event} e - The form submission event
+     * @returns {undefined}
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        //check if textfield is empty
+        // Check if textfield is empty
         if (task.trim() === '') {
             return;
         }
 
+        // Add task to the list
         addTask(task);
         setTask('');
     };
-
     return (
-        <form onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: '20px' }}>
             <TextField
                 id="task-input"
                 label="Add your task"
                 size="small"
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
-                sx={{ mr: '10px' }}
-                style={{ width: 500 }}
-                />
-            <Button 
-                variant="contained" 
-                type="submit" 
-                style={{height:40}}
+                sx={{ mr: '10px', width: 500, backgroundColor: '#fff' }}
+            />
+            <Button
+                variant="contained"
+                type="submit"
+                sx={{ height: 40 }}
             >
                 Add Task
             </Button>
-        </form>
+        </Box>
     );
 };
 
